@@ -43,6 +43,7 @@
                         <th>email</th>
                         <th>mark</th>
                         <th>gender</th>
+                        <th>Action</th>
                     </thead>
                     <tbody>
                     <?php foreach ($data as $item):?>
@@ -52,6 +53,9 @@
                             <td><?php echo $item["email"]; ?></td>
                             <td><?php echo $item["mark"]; ?></td>
                             <td><?php echo $item["gender"]; ?></td>
+                            <td>
+                                <a href="editstudent.php?id=<?php echo $item["id"];?>">Edit</a>
+                            </td>
                         </tr>
                     <?php endforeach;?>
                     </tbody>
