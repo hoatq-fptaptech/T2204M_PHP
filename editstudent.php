@@ -1,6 +1,28 @@
 <?php
     $id = $_GET["id"];
     // dua vao id lay ra sinh vien tu table
+$db = "t2204m";
+$host = "localhost";
+$user = "root";
+$pwd = "root";
+
+$conn = new mysqli($host,$user,$pwd,$db);
+if($conn->connect_error){
+    echo $conn->error;
+    die();
+}
+// ket noi thanh cong
+$sql = "select * from students where id=$id";//students
+$rs = $conn->query($sql);
+$sv = null;
+if($rs->num_rows > 0){
+    while ($row = $rs->fetch_assoc()){
+        $sv = $row;
+    }
+}
+if($sv == null){
+    die("404 not found!");
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -19,25 +41,26 @@
             <div class="row">
                 <div class="col"></div>
                 <div class="col">
-                    <form action="savestudent.php" method="post">
+                    <form action="updatestudent.php?id=<?php echo $id;?>" method="post">
+<!--                        <input type="hidden" name="id" value="--><?php //echo $id ?><!--"/>-->
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Name</label>
-                            <input type="text" name="name" class="form-control" id="exampleFormControlInput1" placeholder="Name" required>
+                            <input value="<?php echo $sv["name"];?>" type="text" name="name" class="form-control" id="exampleFormControlInput1" placeholder="Name" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput2" class="form-label">Email address</label>
-                            <input type="email" name="email" class="form-control" id="exampleFormControlInput2" placeholder="name@example.com" required>
+                            <input value="<?php echo $sv["email"];?>" type="email" name="email" class="form-control" id="exampleFormControlInput2" placeholder="name@example.com" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput3" class="form-label">Mark</label>
-                            <input type="number" name="mark" class="form-control" id="exampleFormControlInput3" placeholder="Mark" required>
+                            <input value="<?php echo $sv["mark"];?>" type="number" name="mark" class="form-control" id="exampleFormControlInput3" placeholder="Mark" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput4" class="form-label">Gender</label>
                             <select class="form-control" name="gender">
-                                <option value="Nam">Nam</option>
-                                <option value="Nữ">Nữ</option>
-                                <option value="Khác">Khác</option>
+                                <option <?php if($sv["gender"]=="Nam"):?>selected<?php endif;?> value="Nam">Nam</option>
+                                <option <?php if($sv["gender"]=="Nữ"):?>selected<?php endif;?> value="Nữ">Nữ</option>
+                                <option <?php if($sv["gender"]=="Khác"):?>selected<?php endif;?> value="Khác">Khác</option>
                             </select>
                         </div>
                         <?php if(isset($_SESSION["error"])):?>

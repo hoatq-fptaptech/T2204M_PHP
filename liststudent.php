@@ -55,6 +55,12 @@
                             <td><?php echo $item["gender"]; ?></td>
                             <td>
                                 <a href="editstudent.php?id=<?php echo $item["id"];?>">Edit</a>
+                            <!--    <a onclick="return confirm('Bạn muốn xóa <?php //echo $item["name"]; ?>')" href="deletestudent.php?id=<?php //echo $item["id"];?>">delete</a> -->
+                                <form action="deletestudent.php" method="post">
+                                    <input type="hidden" name="id" value="<?php echo $item["id"];?>">
+                                    <button onclick="return confirm('Bạn muốn xóa <?php echo $item["name"]; ?>')"
+                                            type="submit">delete</button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach;?>
