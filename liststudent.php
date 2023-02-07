@@ -1,23 +1,7 @@
 <?php
-    $db = "t2204m";
-    $host = "localhost";
-    $user = "root";
-    $pwd = "root";
-
-    $conn = new mysqli($host,$user,$pwd,$db);
-    if($conn->connect_error){
-        echo $conn->error;
-        die();
-    }
-    // ket noi thanh cong
+    include_once("database.php");
     $sql = "select * from students";//students
-    $rs = $conn->query($sql);
-    $data = [];
-    if($rs->num_rows > 0){
-        while ($row = $rs->fetch_assoc()){
-            $data[] = $row;
-        }
-    }
+    $data = get($sql);
 ?>
 <!doctype html>
 <html lang="en">

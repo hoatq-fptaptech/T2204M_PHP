@@ -1,28 +1,15 @@
 <?php
+include_once("database.php");
     $id = $_GET["id"];
     // dua vao id lay ra sinh vien tu table
-$db = "t2204m";
-$host = "localhost";
-$user = "root";
-$pwd = "root";
 
-$conn = new mysqli($host,$user,$pwd,$db);
-if($conn->connect_error){
-    echo $conn->error;
-    die();
-}
 // ket noi thanh cong
 $sql = "select * from students where id=$id";//students
-$rs = $conn->query($sql);
-$sv = null;
-if($rs->num_rows > 0){
-    while ($row = $rs->fetch_assoc()){
-        $sv = $row;
-    }
-}
-if($sv == null){
+$sv = get($sql);
+if(count($sv)==0){
     die("404 not found!");
 }
+$sv = $sv[0];
 ?>
 <!doctype html>
 <html lang="en">
