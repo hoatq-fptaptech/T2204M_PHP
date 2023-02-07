@@ -1,5 +1,6 @@
 <?php
-include_once("../database.php");
+include_once("database.php");
+include_once("IModel.php");
 class Student implements IModel
 {
     protected $table = "students";
