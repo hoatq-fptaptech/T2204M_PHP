@@ -1,7 +1,7 @@
 <?php
-    include_once("database.php");
-    $sql = "select * from students";//students
-    $data = get($sql);
+    include_once("models/Student.php");
+    $st = new Student();
+    $data = $st->get();
 ?>
 <!doctype html>
 <html lang="en">
@@ -32,17 +32,17 @@
                     <tbody>
                     <?php foreach ($data as $item):?>
                         <tr>
-                            <td><?php echo $item["id"]; ?></td>
-                            <td><?php echo $item["name"]; ?></td>
-                            <td><?php echo $item["email"]; ?></td>
-                            <td><?php echo $item["mark"]; ?></td>
-                            <td><?php echo $item["gender"]; ?></td>
+                            <td><?php echo $item->id; ?></td>
+                            <td><?php echo $item->name; ?></td>
+                            <td><?php echo $item->email; ?></td>
+                            <td><?php echo $item->mark; ?></td>
+                            <td><?php echo $item->gender; ?></td>
                             <td>
-                                <a href="editstudent.php?id=<?php echo $item["id"];?>">Edit</a>
+                                <a href="editstudent.php?id=<?php echo $item->id;?>">Edit</a>
                             <!--    <a onclick="return confirm('Bạn muốn xóa <?php //echo $item["name"]; ?>')" href="deletestudent.php?id=<?php //echo $item["id"];?>">delete</a> -->
                                 <form action="deletestudent.php" method="post">
-                                    <input type="hidden" name="id" value="<?php echo $item["id"];?>">
-                                    <button onclick="return confirm('Bạn muốn xóa <?php echo $item["name"]; ?>')"
+                                    <input type="hidden" name="id" value="<?php echo $item->id;?>">
+                                    <button onclick="return confirm('Bạn muốn xóa <?php echo $item->name; ?>')"
                                             type="submit">delete</button>
                                 </form>
                             </td>
